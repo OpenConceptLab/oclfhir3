@@ -1,9 +1,9 @@
 services:
   fhir-server:
-    image: gointerop/tx-fhir-ocl:latest
+    build: .
     container_name: tx-fhir-ocl
     ports:
-      - "8084:80"
+      - "8084:8080"
     depends_on:
       - redis
   redis:
