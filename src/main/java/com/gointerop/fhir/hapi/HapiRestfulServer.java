@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.gointerop.fhir.interceptor.CapabilityStatementCustomizer;
 import com.gointerop.fhir.provider.CodeSystemProvider;
+import com.gointerop.fhir.provider.ConceptMapProvider;
 import com.gointerop.fhir.provider.TerminologyCapabilitiesProvider;
 import com.gointerop.fhir.provider.ValueSetProvider;
 import com.gointerop.fhir.service.TerminologyCapabilitiesService;
@@ -46,6 +46,9 @@ public class HapiRestfulServer extends RestfulServer {
     @Autowired
     private ValueSetProvider valueSetProvider;
 
+    @Autowired
+    private ConceptMapProvider conceptMapProvider;
+
     @Override
     protected void initialize() {
         // Leniencia de handler para atributos (Para o TerminologyCapabilities
@@ -75,6 +78,7 @@ public class HapiRestfulServer extends RestfulServer {
 
         registerProvider(codeSystemProvider);
         registerProvider(valueSetProvider);
+        registerProvider(conceptMapProvider);
 
         // ui
         registerInterceptor(new ResponseHighlighterInterceptor() {
